@@ -16,6 +16,7 @@ and Uzbek (Latin), phone-first.
 | `/` | Redirects to the remembered language (`NEXT_LOCALE` cookie), else the browser's, else `ru` |
 | `POST /api/requests` | The form's endpoint. Validates, filters bots, rate-limits, then forwards to the CRM with the server-only key |
 | `GET /api/health` | `200 {status:"ok", crm:"ok"\|"degraded"\|"not_configured"}` |
+| `GET /api/branch-photos/{name}` | A branch's facade photo, fetched from the CRM with the server-only key; immutable (a new upload is a new name) |
 
 ## Run it
 
@@ -75,7 +76,8 @@ The CRM's frontend already runs on Vercel, and the client chose the same for the
 
 **Where the code runs:**
 - Pages are static with ISR every 5 minutes, served from Vercel's edge.
-- Only `/api/requests` and `/api/health` run as functions. The CRM key stays in them.
+- Only `/api/requests`, `/api/health` and `/api/branch-photos` run as functions. The CRM key
+  stays in them.
 - The in-memory IP rate limiter is per function instance, so on Vercel it is best effort. The
   CRM's per-phone cap is the authoritative limit.
 
@@ -90,15 +92,22 @@ The outputs are committed and the originals are not.
 | File | Source | Used for |
 |---|---|---|
 | `hero-desktop.jpg` 1920×1200, `hero-phone.jpg` 1080×1350 | `work/work5` | Hero, art-directed through `<picture>` |
-| `branch-aviasozlar-2-65.jpg` | `loc/loc3` | Branch 1 card (GPS in loc1–3 matches its coordinates) |
-| `branch-aviasozlar-bozori.jpg` | `loc/loc4` | Branch 2 card |
 | `work-*.jpg` | one per service folder | "Наша мастерская" strip |
+
+**Branch photos are not here.** The director uploads them in the CRM (Филиалы → branch →
+"Сайт" → Фото филиала). The CRM stores each one upright, at most 1600 px, with no EXIF.
+`/site/config` names it per branch (`photo_file`), and the card loads it through
+`/api/branch-photos/{name}`: `next/image` asks that route, the route asks the CRM with the
+key. The card crops it to 16:9, a little above centre, which the CRM's preview shows too. A
+new photo appears within 5 minutes (ISR). A branch without one keeps a neutral card. The
+mock CRM serves `mock-crm/fixtures/branch-photo.jpg` for the first branch, and `npm run
+e2e:live` uploads that file to the real CRM first if the first branch has no photo.
 
 ## Layout
 
 ```
 src/app/[locale]/        layout (html/lang/fonts), page (home), order/, not-found, error, [...rest]
-src/app/api/             requests (public edge → CRM), health
+src/app/api/             requests (public edge → CRM), health, branch-photos (CRM photo proxy)
 src/components/          layout/ (header, menu, footer, lang switch), home/ (sections), ui/ (icons, button, map link)
 src/features/request/    the form: schema, steps, phone mask, Tashkent slots, draft, summary, rail
 src/lib/                 crm (server-only client), site-config (ISR + fallback), maps, hours, seo, rate-limit, env

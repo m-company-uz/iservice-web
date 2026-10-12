@@ -25,6 +25,24 @@ test('home shows the CRM’s branches and hours', async ({ page, request }) => {
   expect(await (await request.get('/api/health')).json()).toEqual({ status: 'ok', crm: 'ok' });
 });
 
+test('branch photos uploaded in the CRM show on the cards', async ({ page, request }) => {
+  const config = await (await request.get(`${CRM}/site/config`, { headers: { 'X-Site-Key': KEY } })).json();
+  // seed-photo.mjs saw to it that at least one branch has one.
+  expect(config.branches.some((b: { photo_file: string | null }) => b.photo_file)).toBe(true);
+  await page.goto('/ru');
+  for (const b of config.branches as { name: string; photo_file: string | null }[]) {
+    const img = page.locator('#branches li', { hasText: b.name }).locator('img');
+    if (!b.photo_file) {
+      await expect(img).toHaveCount(0);
+      continue;
+    }
+    await img.scrollIntoViewIfNeeded();
+    await expect(img).toHaveAttribute('src', new RegExp(encodeURIComponent(`/api/branch-photos/${b.photo_file}`)));
+    // Loaded through next/image → /api/branch-photos → the CRM, not just referenced.
+    await expect.poll(() => img.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth)).toBeGreaterThan(0);
+  }
+});
+
 test('a request typed on the site arrives in the CRM, every field where the manager reads it', async ({ page, request }) => {
   const name = `Live ${Date.now() % 1_000_000}`;
   const phone = freshPhone();

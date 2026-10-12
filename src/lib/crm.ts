@@ -14,6 +14,9 @@ const SUBMIT_TIMEOUT_MS = 10_000;
 
 const hhmm = z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/);
 
+/** A branch photo's name as the CRM stores it: a UUID and `.jpg`, nothing a path could hide in. */
+export const PHOTO_FILE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\.jpg$/;
+
 /** Guards against CRM drift: a config that doesn't parse is ignored in favour of the fallback. */
 export const siteConfigSchema = z.object({
   branches: z.array(
@@ -31,6 +34,7 @@ export const siteConfigSchema = z.object({
       latitude: z.number().min(-90).max(90).nullable(),
       longitude: z.number().min(-180).max(180).nullable(),
       map_query: z.string().min(1),
+      photo_file: z.string().regex(PHOTO_FILE).nullable(),
     }),
   ),
   categories: z.array(
@@ -113,6 +117,22 @@ export async function submitRequest(payload: SiteRequestPayload, clientIp: strin
   if (res.status === 429) return { kind: 'rate_limited' };
   // 401 means the key is wrong — an operator problem, never the visitor's. Logged by the caller.
   return { kind: 'unavailable', status: res.status, reason: res.status === 401 ? 'bad_key' : 'crm_error' };
+}
+
+/**
+ * A branch photo's bytes, streamed from the CRM. Null when the CRM has no such photo (or
+ * isn't configured); throws when it can't be reached.
+ */
+export async function fetchBranchPhoto(file: string): Promise<Response | null> {
+  if (!env.CRM_API_URL || !env.SITE_API_KEY) return null;
+  const res = await fetch(`${env.CRM_API_URL}/site/branch-photos/${file}`, {
+    headers: headers({ Accept: 'image/*' }),
+    signal: AbortSignal.timeout(SUBMIT_TIMEOUT_MS),
+    cache: 'no-store',
+  });
+  if (res.status === 404) return null;
+  if (!res.ok) throw new Error(`crm: GET /site/branch-photos → ${res.status}`);
+  return res;
 }
 
 /** `/api/health` probe: short timeout, never throws. */

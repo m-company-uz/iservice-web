@@ -3,7 +3,8 @@
  * A tiny stand-in for the CRM's `/api/v1/site/*` group (DEVELOPMENT_PLAN §10), for offline
  * development and the mocked Playwright suite. `npm run e2e:live` uses the real CRM instead.
  *
- *   GET  /api/v1/site/config     → src/content/fallback-config.json
+ *   GET  /api/v1/site/config     → src/content/fallback-config.json, with a photo on branch 1
+ *   GET  /api/v1/site/branch-photos/{name} → mock-crm/fixtures/branch-photo.jpg for that name
  *   POST /api/v1/site/requests   → 201 { id, request_number, status }, 200 on idempotent replay
  *   GET  /_received              → every accepted payload (for tests)
  *   POST /_reset                 → forget everything
@@ -19,6 +20,11 @@ import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const config = JSON.parse(readFileSync(join(root, 'src/content/fallback-config.json'), 'utf8'));
+// The real CRM names a photo by a UUID per upload; the fallback has none, so the mock adds
+// one to the first branch and leaves the second without, to cover both cards.
+const PHOTO_NAME = '00000000-0000-4000-8000-000000000001.jpg';
+const photo = readFileSync(join(root, 'mock-crm/fixtures/branch-photo.jpg'));
+config.branches[0].photo_file = PHOTO_NAME;
 const KEY = process.env.SITE_API_KEY || 'dev-site-key-change-me-0000000000000000';
 const PORT = Number(process.env.MOCK_CRM_PORT || 8099);
 
@@ -55,6 +61,11 @@ createServer(async (req, res) => {
   }
 
   if (url.pathname === '/api/v1/site/config' && req.method === 'GET') return send(res, 200, config);
+
+  if (url.pathname === `/api/v1/site/branch-photos/${PHOTO_NAME}` && req.method === 'GET') {
+    res.writeHead(200, { 'Content-Type': 'image/jpeg', 'Content-Length': photo.length });
+    return res.end(photo);
+  }
 
   if (url.pathname === '/api/v1/site/requests' && req.method === 'POST') {
     let body;

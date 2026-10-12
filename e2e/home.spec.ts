@@ -5,7 +5,7 @@ for (const locale of ['ru', 'uz'] as const) {
   test(`home (${locale}) renders from config, has no overflow and passes axe`, async ({ page }) => {
     const errors = collectErrors(page);
     await page.goto(`/${locale}`);
-    await expect(page).toHaveTitle(locale === 'ru' ? /Ремонт телефонов/ : /telefon va noutbuk/);
+    await expect(page).toHaveTitle('iService');
     await expect(page.locator('html')).toHaveAttribute('lang', locale);
     await expect(page.getByRole('heading', { level: 1 })).toHaveText(locale === 'ru' ? 'Ремонт телефона' : 'Telefon taʼmiri');
     // Hours strip: union of both branches, from config.
@@ -30,6 +30,10 @@ test('branch links open the web map on desktop', async ({ page }) => {
   const link = page.locator('#branches a[aria-label*="Aviasozlar 2-65"]');
   await expect(link).toHaveAttribute('href', 'https://yandex.uz/maps/?pt=69.348154,41.284524&z=17&l=map');
   await expect(link).toHaveAttribute('target', '_blank');
+  // A branch without a photo in the CRM keeps a neutral card, never a broken image. (The
+  // first branch has one in the mock CRM, but whether this build shows it depends on ISR
+  // timing; e2e-live and api.spec cover the photo path.)
+  await expect(page.locator('#branches li', { hasText: 'Aviasozlar bozori' }).locator('img')).toHaveCount(0);
 });
 
 test('branch links hand off to the default map app on Android and iPhone', async ({ browser }) => {

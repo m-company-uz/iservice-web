@@ -20,7 +20,8 @@
       ],
       "latitude": 41.284524,
       "longitude": 69.348154,
-      "map_query": "iService, Городок Авиастроителей, 2-й квартал, 65, Ташкент"
+      "map_query": "iService, Городок Авиастроителей, 2-й квартал, 65, Ташкент",
+      "photo_file": null
     },
     {
       "id": "6a1f0c52-3b8e-4f0e-9c1d-2f7a5b9e0a02",
@@ -42,7 +43,8 @@
       ],
       "latitude": null,
       "longitude": null,
-      "map_query": "iService, Бешарыкская улица, 1, Ташкент"
+      "map_query": "iService, Бешарыкская улица, 1, Ташкент",
+      "photo_file": null
     }
   ],
   "categories": [

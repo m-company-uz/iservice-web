@@ -33,6 +33,11 @@ export interface SiteBranch {
   longitude: number | null;
   /** Free-text search used by map apps when there are no coordinates. */
   map_query: string;
+  /**
+   * The facade photo the director uploaded in the CRM, by file name, or null. Served through
+   * `/api/branch-photos/{photo_file}`; a new upload is a new name.
+   */
+  photo_file: string | null;
 }
 
 export interface SiteCategory {

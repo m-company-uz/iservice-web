@@ -21,9 +21,7 @@ const jobs = [
   // Hero: master at the microscope bench. Art-directed: wide on desktop, tall on phones (DEV 1).
   { from: 'img/work/work5.DNG', to: 'hero-desktop.jpg', w: 1920, h: 1200, focusY: 0.47, q: 74 },
   { from: 'img/work/work5.DNG', to: 'hero-phone.jpg', w: 1080, h: 1350, focusY: 0.55, q: 72 },
-  // Branch facades. GPS in loc1–3 and the work shots matches Aviasozlar 2-65; loc4 is the second branch.
-  { from: 'img/loc/loc3.jpg', to: 'branch-aviasozlar-2-65.jpg', w: 1280, h: 720, focusY: 0.38, q: 72 },
-  { from: 'img/loc/loc4.jpg', to: 'branch-aviasozlar-bozori.jpg', w: 1280, h: 720, focusY: 0.42, q: 72 },
+  // Branch facades are not here: the director uploads them in the CRM (Филиалы → Сайт).
   // "Our workshop" strip, one per folder the client sent.
   { from: 'img/repair_and_recovery_of_motherboard/6.jpg', to: 'work-motherboard.jpg', w: 960, h: 1200, focusY: 0.5, q: 72 },
   { from: 'img/notebook_cleaning_and_profilactics/2.jpg', to: 'work-notebook.jpg', w: 960, h: 1200, focusY: 0.5, q: 74 },

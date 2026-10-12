@@ -7,13 +7,6 @@ import { MapLink } from '@/components/ui/map-link';
 import { formatBranchHours, formatPhoneDisplay } from '@/lib/hours';
 import type { Locale, SiteBranch, SiteConfig } from '@/types/site';
 
-/** Facade photos are static assets keyed by the branch's name slug (the CRM ids differ per database). */
-const FACADES: Record<string, string> = {
-  'aviasozlar-2-65': '/images/branch-aviasozlar-2-65.jpg',
-  'aviasozlar-bozori': '/images/branch-aviasozlar-bozori.jpg',
-};
-const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-
 /**
  * Branch cards (§7.2, DEV 2). The whole photo plus "Открыть на карте ↗" is one link that opens
  * the visitor's own map app (see `lib/maps.ts`). No embedded map.
@@ -27,7 +20,9 @@ export async function Branches({ config }: { config: SiteConfig }) {
   const card = (b: SiteBranch, index: number) => {
     const label = locale === 'ru' ? b.label_ru : b.label_uz;
     const address = locale === 'ru' ? b.address_ru : b.address_uz;
-    const photo = FACADES[slug(b.name)];
+    // The facade photo the director uploaded in the CRM; without one the card keeps its
+    // neutral background (Q3: no stock photos).
+    const photo = b.photo_file ? `/api/branch-photos/${b.photo_file}` : null;
     return (
       <li key={b.id} className="overflow-hidden rounded-card border border-line bg-white">
         <MapLink
@@ -42,7 +37,8 @@ export async function Branches({ config }: { config: SiteConfig }) {
               fill
               quality={60}
               sizes="(min-width: 1200px) 650px, (min-width: 834px) 46vw, 100vw"
-              className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+              // Phone facade shots are mostly portrait: the sign sits above the middle.
+              className="object-cover object-[center_40%] transition-transform duration-300 group-hover:scale-[1.02]"
               // The first card is near the fold on desktop; both are lazy on phones.
               loading={index === 0 ? undefined : 'lazy'}
             />

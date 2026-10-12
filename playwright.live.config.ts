@@ -7,7 +7,8 @@ import { defineConfig, devices } from '@playwright/test';
  *   cd ../crm-backend && make seed-demo && make run     # SITE_API_KEY is in its .env
  *   cd ../iservice-web && npm run e2e:live
  *
- * The build runs with the CRM reachable, so pages carry the CRM's real branch ids.
+ * The build runs with the CRM reachable, so pages carry the CRM's real branch ids. Before it,
+ * `e2e-live/seed-photo.mjs` gives the first branch a facade photo if it has none.
  */
 const CRM = process.env.LIVE_CRM_URL ?? 'http://127.0.0.1:8080/api/v1';
 const KEY = process.env.SITE_API_KEY ?? 'dev-site-key-change-me-0000000000000000';
@@ -28,7 +29,7 @@ export default defineConfig({
   },
   projects: [{ name: 'phone', use: { ...devices['Desktop Chrome'], viewport: { width: 390, height: 844 } } }],
   webServer: {
-    command: `npm run build && npx next start -p ${PORT}`,
+    command: `node e2e-live/seed-photo.mjs && npm run build && npx next start -p ${PORT}`,
     url: `http://127.0.0.1:${PORT}/api/health`,
     timeout: 300_000,
     reuseExistingServer: false,

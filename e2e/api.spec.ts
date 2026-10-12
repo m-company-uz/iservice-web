@@ -78,3 +78,24 @@ test('health reports the CRM separately and is always 200', async ({ request }) 
   expect(res.status()).toBe(200);
   expect(await res.json()).toEqual({ status: 'ok', crm: 'ok' });
 });
+
+test('branch photos are proxied from the CRM, by name only, and cached for good', async ({ request }) => {
+  const name = '00000000-0000-4000-8000-000000000001.jpg'; // what the mock CRM publishes
+  const photo = await request.get(`/api/branch-photos/${name}`);
+  expect(photo.status()).toBe(200);
+  expect(photo.headers()['content-type']).toBe('image/jpeg');
+  expect(photo.headers()['cache-control']).toContain('immutable');
+  expect((await photo.body()).byteLength).toBeGreaterThan(1000);
+
+  // next/image can optimise it through this route (the card's real request).
+  const optimised = await request.get(`/_next/image?url=${encodeURIComponent(`/api/branch-photos/${name}`)}&w=640&q=60`, {
+    headers: { Accept: 'image/avif,image/webp,*/*' },
+  });
+  expect(optimised.status()).toBe(200);
+  expect(optimised.headers()['content-type']).toMatch(/^image\/(avif|webp)$/);
+
+  // A name the CRM doesn't have, and anything that isn't a photo name, never reach further.
+  expect((await request.get('/api/branch-photos/00000000-0000-4000-8000-0000000000ff.jpg')).status()).toBe(404);
+  expect((await request.get('/api/branch-photos/..%2Fconfig')).status()).toBe(404);
+  expect((await request.get('/api/branch-photos/photo.png')).status()).toBe(404);
+});

@@ -4,7 +4,7 @@ import { formatDays, formatPhoneDisplay, overallHours } from './hours';
 const RU = 'Пн,Вт,Ср,Чт,Пт,Сб,Вс'.split(',');
 const b = (work_days: number[], opens_at: string, closes_at: string) => ({
   id: 'x', name: 'x', label_ru: 'x', label_uz: 'x', address_ru: 'x', address_uz: 'x', phone: '+998901234567',
-  work_days, opens_at, closes_at, latitude: null, longitude: null, map_query: 'x',
+  work_days, opens_at, closes_at, latitude: null, longitude: null, map_query: 'x', photo_file: null,
 });
 
 describe('hours', () => {
