@@ -1,0 +1,53 @@
+# Every PR and push to main: the gates from DEVELOPMENT_PLAN §11.2 / §13. Deploys are Vercel's
+# job (it builds from the repo); this workflow only decides whether a change may merge.
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main, master]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      NEXT_TELEMETRY_DISABLED: 1
+      NEXT_PUBLIC_SITE_URL: https://iservicepro.uz
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm run i18n:check
+      - run: npm test
+      # No CRM in CI: pages build against src/content/fallback-config.json (§4.2).
+      - run: npm run build
+      - name: JS budget
+        run: npm run budget
+      - run: npx playwright install --with-deps chromium
+      - name: E2E (mock CRM, 390 + 1440, RU + UZ, axe) and jank test
+        run: npm run e2e
+      - name: Lighthouse CI (mobile, budgets block the merge)
+        run: |
+          node mock-crm/server.mjs &
+          npx -y @lhci/cli@0.14 autorun
+        env:
+          MOCK_CRM_PORT: 8199
+          SITE_API_KEY: e2e-site-key-0000000000000000
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: reports
+          path: |
+            playwright-report
+            test-results
+            .lighthouseci

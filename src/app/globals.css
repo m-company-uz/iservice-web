@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-white font-sans text-body antialiased;
+  }
+  /* Anchors land below the sticky header. */
+  [id] {
+    scroll-margin-top: 88px;
+  }
+  /* Focus is always a black outline, never red: red means "error" on this site (DEV 6). */
+  :focus-visible {
+    outline: 2px solid theme('colors.ink');
+    outline-offset: 2px;
+  }
+  .on-dark :focus-visible {
+    outline-color: #fff;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+}
+
+@layer utilities {
+  .pb-safe {
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@layer components {
+  /* The page container: 1328 px content at 1440 (56 px gutters), 16 px gutters on phones (§6). */
+  .page-x {
+    @apply mx-auto w-full max-w-[1440px] px-4 sm:px-6 md:px-10 lg:px-14;
+  }
+  .eyebrow {
+    @apply font-mono text-[11.5px] font-bold uppercase tracking-[0.18em];
+  }
+}

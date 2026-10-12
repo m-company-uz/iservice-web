@@ -1,0 +1,195 @@
+{
+  "meta": {
+    "title": "Toshkentda telefon va noutbuk taʼmiri — i-Service",
+    "description": "Toshkent, Yashnobod tumanidagi i-Service servis markazi: telefon va planshet taʼmiri, asosiy plata taʼmiri, suvdan keyingi taʼmir, noutbuk profilaktikasi va Windows oʻrnatish. Ikki filial, onlayn ariza.",
+    "orderTitle": "Taʼmirlash uchun ariza — i-Service",
+    "orderDescription": "Bir daqiqada ariza qoldiring: qurilma, nosozlik, telefon. Qoʻngʻiroq qilib, vaqtni kelishib olamiz.",
+    "notFoundTitle": "Sahifa topilmadi — i-Service"
+  },
+  "common": {
+    "brand": "i-Service",
+    "cta": "Ariza qoldirish",
+    "skipToContent": "Asosiy qismga oʻtish",
+    "langLabel": "Sayt tili",
+    "home": "Bosh sahifaga",
+    "toSite": "Saytga",
+    "call": "Qoʻngʻiroq qilish",
+    "telegram": "Telegram",
+    "opensNewTab": "(yangi oynada ochiladi)",
+    "days": "Du,Se,Ch,Pa,Ju,Sh,Ya",
+    "everyDay": "Har kuni"
+  },
+  "nav": {
+    "label": "Asosiy menyu",
+    "services": "Xizmatlar",
+    "how": "Qanday ishlaydi",
+    "branches": "Filiallar",
+    "contacts": "Kontaktlar",
+    "menu": "Menyu",
+    "openMenu": "Menyuni ochish",
+    "closeMenu": "Menyuni yopish"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Servis markazi · Toshkent · {count} filial",
+      "title": "Telefon taʼmiri",
+      "sub": "Qurilmani istalgan filialga olib keling yoki ariza qoldiring. Noutbuk va kompyuterlarni ham taʼmirlaymiz.",
+      "imageAlt": "i-Service ustasi mikroskop ostida telefon platasini taʼmirlamoqda"
+    },
+    "hours": "Ish vaqti",
+    "services": {
+      "title": "Nimalarni taʼmirlaymiz",
+      "note": "Apple, Samsung, Xiaomi, Redmi, Huawei va planshetlar. Aniq narxni diagnostikadan keyin aytamiz.",
+      "phones": "Telefon va planshetlar",
+      "computers": "Noutbuk va kompyuterlar",
+      "items": {
+        "screen": { "title": "Ekranni almashtirish", "desc": "Singan, chiziqlar bor yoki sensor ishlamaydi — displey modulini almashtiramiz." },
+        "battery": { "title": "Akkumulyatorni almashtirish", "desc": "Tez tugaydi, sovuqda oʻchadi yoki shishgan — yangisini qoʻyamiz." },
+        "motherboard": { "title": "Asosiy plata taʼmiri", "desc": "Yoqilmaydi, qiziydi, aloqa yoʻqolgan — komponentlar darajasida taʼmirlaymiz." },
+        "water": { "title": "Suvdan keyingi taʼmir", "desc": "Murakkab taʼmir: platani tozalash, quritish, tiklash. Qanchalik tez — shunchalik yaxshi." },
+        "software": { "title": "Dasturiy taʼminot", "desc": "Telefon notoʻgʻri ishlasa — proshivka, yangilash va sozlash." },
+        "data": { "title": "Maʼlumotlarni koʻchirish", "desc": "Kontaktlar, rasmlar va yozishmalarni eski telefondan yangisiga koʻchiramiz." },
+        "housing": { "title": "Korpusni almashtirish", "desc": "Yoriq, darz, egilgan ramka — korpus yoki orqa qopqoqni almashtiramiz." },
+        "drop": { "title": "Tushish va zarbadan keyin", "desc": "Tushgandan keyin telefonni tekshirib, shikastlangan qismlarni tiklaymiz." },
+        "cleaning": { "title": "Tozalash va profilaktika", "desc": "Shovqin qiladi, qiziydi, sekin ishlaydi — changdan tozalab, termopastani almashtiramiz." },
+        "windows": { "title": "Windows oʻrnatish", "desc": "Tizimni toza oʻrnatish va kerakli sozlamalar." },
+        "drivers": { "title": "Antivirus va drayverlar", "desc": "Antivirus va qurilmangizga mos barcha drayverlarni oʻrnatamiz." },
+        "programs": { "title": "Qoʻshimcha dasturlar", "desc": "Ish va oʻqish uchun dasturlarni oʻrnatib, sozlab beramiz." }
+      }
+    },
+    "works": {
+      "title": "Bizning ustaxona",
+      "note": "Servisimizdan haqiqiy rasmlar, internetdan olinmagan.",
+      "motherboard": "Asosiy qismlarni taʼmirlash va maʼlumotlarni tiklash",
+      "motherboardAlt": "Qayta kavsharlash uchun mikrosxemalari olingan telefon platasi",
+      "notebook": "Noutbuk profilaktikasi va dasturlash xizmati",
+      "notebookAlt": "Tozalashdan oldin changlangan ventilyatorli ochiq noutbuk",
+      "build": "Qurilmani tayyorlash",
+      "buildAlt": "Yigʻishdan oldin usta qoʻlidagi qismlarga ajratilgan iPhone"
+    },
+    "how": {
+      "title": "Bu qanday ishlaydi",
+      "steps": {
+        "1": { "title": "Ariza", "desc": "Bir daqiqada shaklni toʻldirasiz: qurilma, nosozlik, telefon." },
+        "2": { "title": "Qoʻngʻiroq", "desc": "Qoʻngʻiroq qilib, modelni aniqlaymiz va narxni aytamiz." },
+        "3": { "title": "Taʼmir", "desc": "Qurilmani tanlagan filialga qulay vaqtda olib kelasiz." },
+        "4": { "title": "Topshirish", "desc": "Ishni tekshirib, toʻlaysiz." }
+      }
+    },
+    "branches": {
+      "title": "Filiallar",
+      "openMap": "Xaritada ochish",
+      "phone": "Telefon",
+      "hours": "Ish vaqti",
+      "photoAlt": "i-Service filiali kirishi: {name}",
+      "mapLinkLabel": "{name} — xaritada ochish"
+    },
+    "sent": {
+      "title": "Ariza yuborildi",
+      "number": "Ariza №{number}.",
+      "sub": "Ish vaqtida qoʻngʻiroq qilamiz.",
+      "close": "Xabarni yopish"
+    }
+  },
+  "footer": {
+    "about": "Toshkentda telefon, planshet, noutbuk va kompyuter taʼmiri.",
+    "phones": "Telefon",
+    "branches": "Filiallar",
+    "telegram": "Telegram",
+    "rights": "© {year} i-Service. Barcha huquqlar himoyalangan"
+  },
+  "request": {
+    "title": "Taʼmirlash uchun ariza",
+    "sub": "Uch qadam, taxminan bir daqiqa. Ish vaqtida qoʻngʻiroq qilamiz.",
+    "back": "Ortga",
+    "close": "Arizani yopish",
+    "next": "Keyingi",
+    "submit": "Arizani yuborish",
+    "sending": "Yuborilmoqda…",
+    "stepOf": "{step}-qadam / 3",
+    "stepsLabel": "Ariza qadamlari",
+    "stepDone": "tayyor",
+    "required": "Faqat nosozlik va telefon majburiy",
+    "steps": {
+      "1": "Qurilma",
+      "2": "Kontaktlar",
+      "3": "Vaqt va tasdiq"
+    },
+    "headings": {
+      "1": "Qurilmaga nima boʻldi?",
+      "2": "Siz bilan qanday bogʻlanamiz?",
+      "3": "Filial va qulay vaqt"
+    },
+    "summary": {
+      "label": "Sizning arizangiz",
+      "empty": "Birinchi qadamni toʻldiring"
+    },
+    "fields": {
+      "deviceType": "Qurilma",
+      "category": "Nosozlik",
+      "brand": "Brend",
+      "brandPlaceholder": "Brendni tanlang",
+      "model": "Qurilma modeli",
+      "modelPlaceholderPhone": "iPhone 13 Pro",
+      "modelPlaceholderComputer": "ASUS VivoBook 15",
+      "defect": "Nosozlikni tavsiflang",
+      "defectPlaceholder": "Masalan: ekran singan, tach ishlaydi, tepada chiziqlar",
+      "name": "Ism",
+      "namePlaceholder": "Sizga qanday murojaat qilaylik",
+      "phone": "Telefon raqami",
+      "channel": "Qanday bogʻlanish qulay",
+      "branch": "Filial",
+      "branchAny": "Istalgan",
+      "branchAnyNote": "Eng yaqinini aytamiz",
+      "branchHours": "Ish vaqti: {hours}",
+      "date": "Qulay sana",
+      "datePlaceholder": "Sanani tanlang",
+      "time": "Vaqt",
+      "timeHint": "Avval sanani tanlang",
+      "comment": "Izoh",
+      "commentPlaceholder": "Masalan: 18:00 dan keyin qoʻngʻiroq qiling",
+      "consent": "Shaxsiy maʼlumotlarimni qayta ishlashga va koʻrsatilgan raqamga qoʻngʻiroq qilinishiga roziman.",
+      "optional": "ixtiyoriy"
+    },
+    "deviceTypes": {
+      "phone": "Telefon",
+      "tablet": "Planshet",
+      "laptop": "Noutbuk",
+      "pc": "Kompyuter"
+    },
+    "channels": {
+      "call": "Qoʻngʻiroq",
+      "callNote": "Oʻzimiz qoʻngʻiroq qilamiz",
+      "telegram": "Telegram",
+      "telegramNote": "Shu raqamga Telegramda yozamiz"
+    },
+    "dates": {
+      "today": "bugun",
+      "tomorrow": "ertaga"
+    },
+    "errors": {
+      "banner": "{count, plural, other {# ta maydonni}} tekshiring — ariza hali yuborilmadi.",
+      "category_or_defect": "Nosozlikni tanlang yoki tavsiflang",
+      "too_long": "Matn juda uzun",
+      "phone_required": "Telefon raqamini kiriting",
+      "phone_invalid": "Raqamni +998 XX XXX-XX-XX formatida kiriting",
+      "time_required": "Vaqtni tanlang",
+      "consent_required": "Qoʻngʻiroq qilishimiz uchun roziligingiz kerak",
+      "invalid": "Bu maydonni tekshiring",
+      "unavailableTitle": "Arizani yuborib boʻlmadi",
+      "unavailable": "Maʼlumotlar saqlandi. Qayta urinib koʻring yoki bizga qoʻngʻiroq qiling.",
+      "retry": "Qayta urinish",
+      "rateLimitedTitle": "Bu qurilmadan juda koʻp ariza yuborildi",
+      "rateLimited": "Bizga qoʻngʻiroq qiling — bu tezroq boʻladi."
+    }
+  },
+  "notFound": {
+    "title": "Bunday sahifa yoʻq",
+    "text": "Havola eskirgan boʻlishi mumkin. Bosh sahifadan boshlang yoki bizga qoʻngʻiroq qiling."
+  },
+  "error": {
+    "title": "Nimadir notoʻgʻri ketdi",
+    "text": "Xatolik haqida bilamiz. Qayta urinib koʻring yoki bizga qoʻngʻiroq qiling.",
+    "retry": "Qayta urinish"
+  }
+}
